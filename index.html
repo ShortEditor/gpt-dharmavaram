@@ -580,6 +580,8 @@ footer {
 .reveal.in { opacity: 1; transform: none; }
 
 /* ─── RESPONSIVE ─────────────────────────── */
+html, body { overflow-x: hidden; max-width: 100vw; }
+
 @media (max-width: 1024px) {
   :root { --section-v: 64px; }
   .container { padding: 0 24px; }
@@ -598,101 +600,138 @@ footer {
   .contact-grid { grid-template-columns: 1fr 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 32px; }
   .topbar-right { display: none; }
-  /* Hide desktop nav items, show hamburger */
   .nav-links   { display: none; }
   .nav-actions .btn-outline { display: none; }
   .hamburger   { display: flex; }
-}
-@media (max-width: 640px) {
-  h1 { font-size: 32px; }
-  .dept-grid   { grid-template-columns: 1fr; }
-  .vm-grid     { grid-template-columns: 1fr; }
-  .faculty-grid-6 { grid-template-columns: repeat(2, 1fr); }
-  .faculty-grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .subject-grid { grid-template-columns: 1fr; }
-  .grievance-grid { grid-template-columns: repeat(2, 1fr); }
-  .contact-grid { grid-template-columns: 1fr; }
-  .footer-main { grid-template-columns: 1fr; }
-  .hero-bar-item { flex: 100%; }
-  .hero-actions { flex-direction: column; }
-  .hero-actions .btn { width: 100%; justify-content: center; }
-  .nav-brand-sub { display: none; }
 }
 
-/* ─── MOBILE OPTIMISED ───────────────────── */
-html, body { overflow-x: hidden; max-width: 100vw; }
-@media (max-width: 1024px) {
-  :root { --section-v: 64px; }
-  .container { padding: 0 24px; }
-  .hero-layout { grid-template-columns: 1fr; }
-  .hero-aside  { display: none; }
-  .hero-bar    { flex-wrap: wrap; }
-  .hero-bar-item { flex: calc(50% - 12px); border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
-  .about-layout, .adm-layout { grid-template-columns: 1fr; gap: 40px; }
-  .dept-grid   { grid-template-columns: 1fr 1fr; }
-  .general-card { grid-template-columns: 1fr; }
-  .vm-grid     { grid-template-columns: 1fr 1fr; }
-  .faculty-grid-6 { grid-template-columns: repeat(3, 1fr); }
-  .faculty-grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .notif-layout { grid-template-columns: 1fr; }
-  .grievance-grid { grid-template-columns: repeat(3, 1fr); }
-  .contact-grid { grid-template-columns: 1fr 1fr; }
-  .footer-main { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .topbar-right { display: none; }
-  .nav-links   { display: none; }
-  .nav-actions .btn-outline { display: none; }
-  .hamburger   { display: flex; }
-}
 @media (max-width: 640px) {
   :root { --section-v: 44px; }
-  .container { padding: 0 16px; }
-  .section   { padding: 44px 0; }
-  h1 { font-size: 28px; line-height: 1.12; }
-  h2 { font-size: 22px; }
-  .topbar-left { gap: 14px; }
+  .container { padding: 0 14px; }
+  .section   { padding: 40px 0; }
+
+  /* Typography */
+  h1 { font-size: 26px; line-height: 1.12; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 15px; }
+
+  /* Topbar */
+  .topbar { padding: 6px 0; }
+  .topbar-left { gap: 12px; }
   .topbar-left a { font-size: 11px; }
-  .nav-brand-name { font-size: 12px; }
+
+  /* Nav — compact single row */
+  .nav-inner { padding: 9px 0; gap: 8px; }
+  .nav-brand { gap: 8px; }
+  .nav-emblem { width: 30px; height: 30px; }
+  .nav-brand-name { font-size: 11.5px; line-height: 1.2; }
   .nav-brand-sub  { display: none; }
-  .nav-actions .btn-primary { font-size: 11px; padding: 7px 11px; }
-  .hero { padding: 36px 0 0; }
-  .hero-body { padding-bottom: 36px; }
+  /* Hide "Apply via POLYCET" button on very small screens so hamburger fits */
+  .nav-actions .btn-primary { display: none; }
+  .hamburger { display: flex; }
+
+  /* Ticker */
+  .ticker { padding: 6px 0; }
+  .ticker-item { font-size: 11px; }
+  .ticker-label { font-size: 9px; padding: 3px 8px; margin-right: 12px; }
+
+  /* Hero */
+  .hero { padding: 32px 0 0; }
+  .hero-body { padding-bottom: 32px; }
+  .hero-eyebrow-text { font-size: 9px; }
   .hero h1 { font-size: 26px; }
-  .hero-desc { font-size: 14px; margin: 12px 0 22px; }
-  .hero-actions { flex-direction: column; gap: 10px; }
-  .hero-actions .btn { width: 100%; justify-content: center; }
-  .hero-bar { flex-direction: column; margin-top: 28px; }
-  .hero-bar-item { flex: 100%; padding: 12px 0; }
-  .hero-bar-val { font-size: 20px; }
-  .section-hd { margin-bottom: 24px; }
-  .section-hd-row { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-  .about-layout { grid-template-columns: 1fr; gap: 24px; }
-  .vm-grid   { grid-template-columns: 1fr; gap: 12px; }
-  .vm-card   { padding: 16px; }
-  .dept-grid { grid-template-columns: 1fr; gap: 14px; }
-  .dept-head { padding: 18px 20px; }
-  .dept-body { padding: 16px 20px 20px; }
+  .hero-desc { font-size: 13.5px; margin: 12px 0 20px; }
+  .hero-actions { flex-direction: column; gap: 9px; }
+  .hero-actions .btn { width: 100%; justify-content: center; font-size: 13px; padding: 12px 18px; }
+
+  /* Hero stats bar — 2x2 grid instead of stacked column */
+  .hero-bar { display: grid; grid-template-columns: 1fr 1fr; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.09); }
+  .hero-bar-item { flex: unset; padding: 14px 12px; border-right: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .hero-bar-item:nth-child(2n) { border-right: none; }
+  .hero-bar-item:nth-child(3), .hero-bar-item:nth-child(4) { border-bottom: none; }
+  .hero-bar-val { font-size: 18px; }
+  .hero-bar-key { font-size: 9px; }
+
+  /* Section header */
+  .section-hd { margin-bottom: 22px; }
+  .section-hd h2 { font-size: 20px; }
+  .section-hd p  { font-size: 13px; margin-top: 8px; }
+  .section-hd-row { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 22px; }
+
+  /* About */
+  .about-layout { grid-template-columns: 1fr; gap: 22px; }
+  .meta-item { padding: 11px 0; }
+  .meta-key { font-size: 10px; }
+  .meta-val { font-size: 13px; }
+  .vm-grid  { grid-template-columns: 1fr; gap: 10px; }
+  .vm-card  { padding: 14px; }
+
+  /* Departments */
+  .dept-grid { grid-template-columns: 1fr; gap: 12px; }
+  .dept-head { padding: 16px 18px; }
+  .dept-body { padding: 14px 18px 18px; }
+  .dept-body p { font-size: 12.5px; }
+
+  /* General subjects */
   .general-card  { grid-template-columns: 1fr; }
-  .general-left  { padding: 22px 20px; }
-  .general-right { padding: 18px 20px; }
-  .subject-grid  { grid-template-columns: 1fr; gap: 8px; }
+  .general-left  { padding: 20px 18px; }
+  .general-right { padding: 16px 18px; }
+  .subject-grid  { grid-template-columns: 1fr; gap: 7px; }
+  .subject-name  { font-size: 12.5px; }
+
+  /* Faculty */
   .faculty-grid-6, .faculty-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .fc { padding: 14px 8px; }
-  .fc-avatar { width: 44px; height: 44px; font-size: 13px; }
+  .faculty-block { margin-bottom: 32px; }
+  .fc { padding: 13px 8px; }
+  .fc-avatar { width: 42px; height: 42px; font-size: 13px; }
   .fc-name { font-size: 12px; }
-  .notif-layout { grid-template-columns: 1fr; gap: 24px; }
-  .quicklinks-box { padding: 20px; }
-  .adm-layout { grid-template-columns: 1fr; gap: 24px; }
-  .adm-card { padding: 22px 18px; }
-  .step { gap: 12px; padding-bottom: 18px; }
-  .step-num { width: 30px; height: 30px; font-size: 12px; }
+  .fc-role { font-size: 10.5px; }
+
+  /* Notifications */
+  .notif-layout { grid-template-columns: 1fr; gap: 22px; }
+  .notif-item   { gap: 10px; padding: 13px 0; }
+  .notif-title  { font-size: 13px; }
+  .quicklinks-box { padding: 18px; }
+
+  /* Admissions */
+  .adm-layout { grid-template-columns: 1fr; gap: 22px; }
+  .adm-card   { padding: 20px 16px; }
+  .adm-card h3 { font-size: 15px; }
+  .adm-row    { font-size: 12.5px; padding: 10px 0; }
+  .step       { gap: 12px; padding-bottom: 16px; }
+  .step-num   { width: 28px; height: 28px; font-size: 11px; }
+  .step-body h4 { font-size: 13px; }
+  .step-body p  { font-size: 12.5px; }
+
+  /* Grievance */
   .grievance-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .gv-card { padding: 14px 10px; }
-  .contact-grid { grid-template-columns: 1fr; gap: 12px; }
-  .contact-card { padding: 20px; }
-  .footer-main { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
-  footer { padding: 32px 0 0; }
+  .gv-avatar { width: 40px; height: 40px; font-size: 12px; margin-bottom: 8px; }
+  .gv-name { font-size: 12px; }
+  .gv-role { font-size: 10px; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 10px; }
+  .contact-card { padding: 18px; }
+  .contact-icon { width: 36px; height: 36px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 10px; }
+  .contact-card p  { font-size: 13px; }
+
+  /* Footer */
+  .footer-main { grid-template-columns: 1fr; gap: 22px; padding-bottom: 26px; }
+  footer { padding: 28px 0 0; }
+  .footer-brand-name { font-size: 13px; }
+  .footer-brand p    { font-size: 12px; }
+  .footer-col h5     { font-size: 9px; }
+  .footer-col ul a   { font-size: 12px; }
   .footer-bottom { flex-direction: column; gap: 4px; font-size: 11px; padding: 12px 0; }
+
+  /* Mobile nav drawer */
   .mobile-nav-links li a { font-size: 13.5px; padding: 12px 10px; }
+  .mobile-nav-footer .btn { font-size: 12.5px; }
+
+  /* Admission banner */
+  .adm-banner-inner { flex-direction: column !important; gap: 16px !important; padding: 20px !important; }
 }
 </style>
 </head>
