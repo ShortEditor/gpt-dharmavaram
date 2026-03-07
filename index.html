@@ -690,6 +690,28 @@ footer {
   .gal-item:nth-child(4) { grid-column: span 1; }
 }
 
+/* ─── VIDEO ──────────────────────────────── */
+.video-wrap {
+  margin-top: 40px;
+  display: flex; justify-content: center;
+}
+.video-frame {
+  width: 100%; max-width: 860px;
+  aspect-ratio: 16/9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+.video-frame iframe {
+  width: 100%; height: 100%;
+  display: block;
+}
+@media (max-width: 640px) {
+  .video-frame { border-radius: 8px; }
+}
+
 /* ─── RESPONSIVE ─────────────────────────── */
 html, body { overflow-x: hidden; max-width: 100vw; }
 
@@ -892,6 +914,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
         <li><a href="https://govtpolydharmavaram.ac.in/about" target="_blank">About</a></li>
         <li><a href="#departments">Departments</a></li>
         <li><a href="#gallery" class="nav-link">Gallery</a>
+          <a href="#video" class="nav-link">Video</a>
           <a href="#faculty">Faculty</a></li>
         <li><a href="#notifications">Notifications</a></li>
         <li><a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank">Admissions</a></li>
@@ -1343,6 +1366,32 @@ html, body { overflow-x: hidden; max-width: 100vw; }
               </div>
             </div>
           </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     VIDEO
+════════════════════════════════════════ -->
+<section class="section" id="video">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Watch & Explore</span>
+      <h2>Campus Video</h2>
+      <hr class="rule-accent">
+    </div>
+    <div class="video-wrap reveal">
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/MmkvSjYqFCU?si=sBHDo3_fJIc_4R70"
+          title="Government Polytechnic Dharmavaram"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
   </div>
 </section>
