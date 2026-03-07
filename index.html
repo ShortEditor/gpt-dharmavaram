@@ -712,6 +712,26 @@ footer {
   .video-frame { border-radius: 8px; }
 }
 
+/* ─── YT CUSTOM CONTROLS ─────────────────── */
+.yt-controls {
+  position: absolute; bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.yt-btn {
+  background: rgba(10,37,64,0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.yt-btn:hover { background: rgba(37,99,235,0.9); transform: scale(1.1); }
+
 /* ─── RESPONSIVE ─────────────────────────── */
 html, body { overflow-x: hidden; max-width: 100vw; }
 
@@ -1384,13 +1404,20 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     <div class="video-wrap reveal">
       <div class="video-frame">
         <iframe
-          src="https://www.youtube.com/embed/MmkvSjYqFCU?si=sBHDo3_fJIc_4R70"
+          id="yt-player"
+          src="https://www.youtube.com/embed/MmkvSjYqFCU?si=sBHDo3_fJIc_4R70&controls=0&modestbranding=1&rel=0&enablejsapi=1"
           title="Government Polytechnic Dharmavaram"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen>
         </iframe>
+        <div class="yt-controls">
+          <button class="yt-btn" id="yt-playpause" onclick="ytToggle()" title="Play / Pause">
+            <svg id="yt-play-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="yt-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1758,5 +1785,23 @@ mobileLinks.forEach(function(link) {
   link.addEventListener('click', closeMenu);
 });
 </script>
+
+<script>
+  var ytPlayer, ytPlaying = false;
+  function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('yt-player', {
+      events: { onStateChange: function(e) {
+        ytPlaying = e.data === YT.PlayerState.PLAYING;
+        document.getElementById('yt-play-icon').style.display  = ytPlaying ? 'none'  : '';
+        document.getElementById('yt-pause-icon').style.display = ytPlaying ? '' : 'none';
+      }}
+    });
+  }
+  function ytToggle() {
+    if (!ytPlayer) return;
+    ytPlaying ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+  }
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
