@@ -714,23 +714,52 @@ footer {
 
 /* ─── YT CUSTOM CONTROLS ─────────────────── */
 .yt-controls {
-  position: absolute; bottom: 16px; left: 50%;
-  transform: translateX(-50%);
+  position: absolute; bottom: 0; left: 0; right: 0;
   z-index: 10;
+  background: linear-gradient(to top, rgba(5,15,35,0.95) 0%, transparent 100%);
+  padding: 24px 16px 14px;
+  border-radius: 0 0 14px 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.video-frame:hover .yt-controls { opacity: 1; }
+.yt-bar {
+  display: flex; align-items: center; gap: 10px;
 }
 .yt-btn {
-  background: rgba(10,37,64,0.85);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-  width: 52px; height: 52px;
-  border-radius: 50%;
+  background: none; border: none;
+  color: #fff; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  padding: 4px; border-radius: 4px;
+  transition: color 0.2s, transform 0.15s;
+  flex-shrink: 0;
 }
-.yt-btn:hover { background: rgba(37,99,235,0.9); transform: scale(1.1); }
+.yt-btn:hover { color: #60a5fa; transform: scale(1.15); }
+.yt-time {
+  font-size: 11px; color: rgba(255,255,255,0.75);
+  font-family: monospace; white-space: nowrap; flex-shrink: 0;
+}
+.yt-progress {
+  flex: 1; height: 4px; background: rgba(255,255,255,0.2);
+  border-radius: 4px; cursor: pointer; position: relative;
+  transition: height 0.15s;
+}
+.yt-progress:hover { height: 6px; }
+.yt-progress-fill {
+  height: 100%; background: #3b82f6;
+  border-radius: 4px; width: 0%; pointer-events: none;
+}
+.yt-progress-thumb {
+  position: absolute; top: 50%; left: 0%;
+  transform: translate(-50%, -50%);
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #fff; pointer-events: none;
+  opacity: 0; transition: opacity 0.15s;
+}
+.yt-progress:hover .yt-progress-thumb { opacity: 1; }
+@media (max-width: 480px) {
+  .yt-time { display: none; }
+}
 
 /* ─── RESPONSIVE ─────────────────────────── */
 html, body { overflow-x: hidden; max-width: 100vw; }
@@ -1405,7 +1434,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
       <div class="video-frame">
         <iframe
           id="yt-player"
-          src="https://www.youtube.com/embed/MmkvSjYqFCU?si=sBHDo3_fJIc_4R70&controls=0&modestbranding=1&rel=0&enablejsapi=1"
+          src="https://www.youtube.com/embed/MmkvSjYqFCU?si=EhNZBnbMt7srBeC1&controls=0&modestbranding=1&rel=0&enablejsapi=1"
           title="Government Polytechnic Dharmavaram"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1413,10 +1442,30 @@ html, body { overflow-x: hidden; max-width: 100vw; }
           allowfullscreen>
         </iframe>
         <div class="yt-controls">
-          <button class="yt-btn" id="yt-playpause" onclick="ytToggle()" title="Play / Pause">
-            <svg id="yt-play-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="yt-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-          </button>
+          <div class="yt-bar">
+            <!-- Play/Pause -->
+            <button class="yt-btn" id="yt-playpause" onclick="ytToggle()" title="Play / Pause">
+              <svg id="yt-play-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="yt-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <!-- Time -->
+            <span class="yt-time" id="yt-current">0:00</span>
+            <!-- Progress bar -->
+            <div class="yt-progress" id="yt-progress" onclick="ytSeek(event)">
+              <div class="yt-progress-fill" id="yt-fill"></div>
+              <div class="yt-progress-thumb" id="yt-thumb"></div>
+            </div>
+            <span class="yt-time" id="yt-duration">0:00</span>
+            <!-- Volume -->
+            <button class="yt-btn" id="yt-mute" onclick="ytMute()" title="Mute / Unmute">
+              <svg id="yt-vol-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+              <svg id="yt-mute-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+            </button>
+            <!-- Fullscreen -->
+            <button class="yt-btn" onclick="ytFullscreen()" title="Fullscreen">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1724,7 +1773,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
       <span>© 2023 Government Polytechnic Dharmavaram. All rights reserved.</span>
       <span>Affiliated to SBTET, Andhra Pradesh &nbsp;·&nbsp; AICTE Approved</span>
       <span style="color:rgba(255,255,255,0.25);font-size:10.5px;width:100%;margin-top:4px;">
-        Designed &amp; Developed by <span style="color:var(--blue-muted);font-weight:600;">Naga Ganesh Eswar</span> &nbsp;·&nbsp; CME Student, Govt. Polytechnic Dharmavaram
+        Designed &amp; Developed by <span style="color:var(--blue-muted);font-weight:600;">Naga Ganesh Eswar</span> &nbsp;·&nbsp; IT Student, Govt. Polytechnic Dharmavaram
       </span>
     </div>
   </div>
@@ -1787,19 +1836,65 @@ mobileLinks.forEach(function(link) {
 </script>
 
 <script>
-  var ytPlayer, ytPlaying = false;
+  var ytPlayer, ytPlaying = false, ytMuted = false, ytTimer;
+
   function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('yt-player', {
-      events: { onStateChange: function(e) {
-        ytPlaying = e.data === YT.PlayerState.PLAYING;
-        document.getElementById('yt-play-icon').style.display  = ytPlaying ? 'none'  : '';
-        document.getElementById('yt-pause-icon').style.display = ytPlaying ? '' : 'none';
-      }}
+      events: {
+        onReady: function(e) {
+          var dur = ytPlayer.getDuration();
+          document.getElementById('yt-duration').textContent = ytFmt(dur);
+          ytTimer = setInterval(ytUpdate, 500);
+        },
+        onStateChange: function(e) {
+          ytPlaying = e.data === YT.PlayerState.PLAYING;
+          document.getElementById('yt-play-icon').style.display  = ytPlaying ? 'none' : '';
+          document.getElementById('yt-pause-icon').style.display = ytPlaying ? '' : 'none';
+        }
+      }
     });
   }
+
+  function ytUpdate() {
+    if (!ytPlayer || !ytPlayer.getCurrentTime) return;
+    var cur = ytPlayer.getCurrentTime();
+    var dur = ytPlayer.getDuration();
+    document.getElementById('yt-current').textContent = ytFmt(cur);
+    var pct = dur ? (cur / dur * 100) : 0;
+    document.getElementById('yt-fill').style.width  = pct + '%';
+    document.getElementById('yt-thumb').style.left  = pct + '%';
+  }
+
+  function ytFmt(s) {
+    s = Math.floor(s || 0);
+    return Math.floor(s/60) + ':' + ('0' + (s%60)).slice(-2);
+  }
+
   function ytToggle() {
     if (!ytPlayer) return;
     ytPlaying ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+  }
+
+  function ytMute() {
+    if (!ytPlayer) return;
+    ytMuted = !ytMuted;
+    ytMuted ? ytPlayer.mute() : ytPlayer.unMute();
+    document.getElementById('yt-vol-icon').style.display  = ytMuted ? 'none' : '';
+    document.getElementById('yt-mute-icon').style.display = ytMuted ? '' : 'none';
+  }
+
+  function ytSeek(e) {
+    if (!ytPlayer) return;
+    var bar = document.getElementById('yt-progress');
+    var rect = bar.getBoundingClientRect();
+    var pct = (e.clientX - rect.left) / rect.width;
+    ytPlayer.seekTo(ytPlayer.getDuration() * pct, true);
+  }
+
+  function ytFullscreen() {
+    var iframe = document.getElementById('yt-player');
+    if (iframe.requestFullscreen) iframe.requestFullscreen();
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
   }
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
