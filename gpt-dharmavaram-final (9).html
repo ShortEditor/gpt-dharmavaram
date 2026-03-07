@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Polytechnic Dharmavaram</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue-deep:    #0A2540;
+  --blue-accent:  #2563EB;
+  --blue-hover:   #1D4ED8;
+  --blue-light:   #EFF6FF;
+  --blue-border:  #BFDBFE;
+  --blue-muted:   #93C5FD;
+  --gray-50:      #F9FAFB;
+  --gray-100:     #F3F4F6;
+  --gray-200:     #E5E7EB;
+  --gray-400:     #9CA3AF;
+  --gray-600:     #4B5563;
+  --white:        #FFFFFF;
+  --text-primary: #0A2540;
+  --text-body:    #374151;
+  --text-muted:   #6B7280;
+  --container:    1200px;
+  --section-v:    96px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, Helvetica, Arial, sans-serif;
+  color: var(--text-primary);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LAYOUT ─────────────────────────────── */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 40px; }
+.section    { padding: var(--section-v) 0; }
+.section-alt { background: var(--gray-50); }
+
+/* ─── TYPE ───────────────────────────────── */
+.eyebrow {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--blue-accent);
+  display: block; margin-bottom: 12px;
+}
+h1 { font-size: clamp(40px, 5.2vw, 68px); font-weight: 800; line-height: 1.06; letter-spacing: -0.03em; }
+h2 { font-size: clamp(26px, 2.8vw, 40px); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; }
+h3 { font-size: 18px; font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; }
+h4 { font-size: 14px; font-weight: 700; letter-spacing: 0.01em; }
+p  { color: var(--text-body); line-height: 1.75; }
+.rule-accent { display: block; width: 36px; height: 2px; background: var(--blue-accent); border: none; margin-top: 16px; }
+
+/* ─── BUTTONS ────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: inherit; font-size: 13.5px; font-weight: 600;
+  padding: 11px 22px; border-radius: 6px;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.18s ease; border: none; letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.btn-primary  { background: var(--blue-accent); color: #fff; }
+.btn-primary:hover  { background: var(--blue-hover); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,0.35); }
+.btn-outline  { background: transparent; color: var(--blue-deep); border: 1.5px solid var(--gray-200); }
+.btn-outline:hover  { border-color: var(--blue-accent); color: var(--blue-accent); }
+.btn-ghost    { background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.82); border: 1px solid rgba(255,255,255,0.15); }
+.btn-ghost:hover    { background: rgba(255,255,255,0.16); color: #fff; }
+.btn-white    { background: #fff; color: var(--blue-deep); box-shadow: 0 1px 3px rgba(0,0,0,0.10); }
+.btn-white:hover    { box-shadow: 0 4px 14px rgba(0,0,0,0.14); transform: translateY(-1px); }
+
+/* ─── SVG ICON HELPER ────────────────────── */
+.icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.icon svg { display: block; }
+
+/* ─── TOP BAR ────────────────────────────── */
+.topbar {
+  background: var(--blue-deep);
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; }
+.topbar-left  { display: flex; gap: 24px; align-items: center; }
+.topbar-right { display: flex; gap: 20px; align-items: center; }
+.topbar-left a,
+.topbar-right a,
+.topbar-right span {
+  font-size: 12px; color: rgba(255,255,255,0.6);
+  text-decoration: none; display: flex; align-items: center; gap: 6px;
+  transition: color 0.18s;
+}
+.topbar-left a:hover,
+.topbar-right a:hover { color: #fff; }
+.topbar-left svg,
+.topbar-right svg { width: 12px; height: 12px; stroke: rgba(255,255,255,0.45); flex-shrink: 0; }
+
+/* ─── NAV ────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: 0 1px 4px rgba(10,37,64,0.06);
+  transition: box-shadow 0.2s;
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 0; gap: 16px;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-emblem {
+  width: 44px; height: 48px;
+  background: transparent;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  overflow: visible;
+}
+.nav-brand-name { font-size: 13.5px; font-weight: 700; color: var(--blue-deep); line-height: 1.25; }
+.nav-brand-sub  { font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em; margin-top: 1px; }
+
+/* Desktop links */
+.nav-links {
+  display: flex; align-items: center; gap: 2px; list-style: none;
+  flex: 1; justify-content: center;
+}
+.nav-links a {
+  font-size: 12.5px; font-weight: 500; color: var(--text-muted);
+  text-decoration: none; padding: 7px 11px; border-radius: 5px;
+  transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--blue-deep); background: var(--gray-100); }
+.nav-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 38px; height: 38px;
+  background: none; border: 1.5px solid var(--gray-200);
+  border-radius: 7px; cursor: pointer; flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+.hamburger:hover { border-color: var(--blue-accent); }
+.hamburger span {
+  display: block; width: 18px; height: 1.5px;
+  background: var(--blue-deep); border-radius: 2px;
+  transition: all 0.25s ease;
+  transform-origin: center;
+}
+/* Hamburger → X when open */
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.mobile-nav {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 190;
+}
+.mobile-nav-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(10,37,64,0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity 0.25s;
+}
+.mobile-nav-drawer {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: min(300px, 85vw);
+  background: #fff;
+  box-shadow: -4px 0 32px rgba(10,37,64,0.18);
+  display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+}
+.mobile-nav.open { display: block; }
+.mobile-nav.open .mobile-nav-backdrop { opacity: 1; }
+.mobile-nav.open .mobile-nav-drawer   { transform: translateX(0); }
+
+.mobile-nav-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.mobile-nav-title { font-size: 13px; font-weight: 700; color: var(--blue-deep); }
+.mobile-nav-close {
+  width: 32px; height: 32px; border-radius: 6px;
+  background: var(--gray-100); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.mobile-nav-close:hover { background: var(--gray-200); }
+.mobile-nav-close svg { width: 16px; height: 16px; stroke: var(--blue-deep); }
+
+.mobile-nav-links { list-style: none; padding: 12px 12px; flex: 1; }
+.mobile-nav-links li a {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 14px; font-weight: 500; color: var(--text-body);
+  text-decoration: none; padding: 13px 12px; border-radius: 7px;
+  transition: all 0.15s; border-bottom: 1px solid transparent;
+}
+.mobile-nav-links li a:hover { background: var(--blue-light); color: var(--blue-accent); }
+.mobile-nav-links li a svg { width: 14px; height: 14px; stroke: var(--gray-400); flex-shrink: 0; }
+
+.mobile-nav-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--gray-200);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.mobile-nav-footer .btn { width: 100%; justify-content: center; font-size: 13px; }
+
+/* ─── TICKER ─────────────────────────────── */
+.ticker { background: var(--blue-accent); padding: 9px 0; overflow: hidden; }
+.ticker-inner { display: flex; align-items: center; }
+.ticker-label {
+  background: var(--blue-deep); color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 14px; border-radius: 3px; white-space: nowrap;
+  flex-shrink: 0; margin-right: 24px;
+}
+.ticker-track { overflow: hidden; flex: 1; }
+.ticker-scroll {
+  display: flex; gap: 56px; white-space: nowrap;
+  animation: scroll-left 28s linear infinite;
+}
+.ticker-scroll:hover { animation-play-state: paused; }
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-item {
+  font-size: 12.5px; font-weight: 500; color: #fff;
+  display: flex; align-items: center; gap: 10px;
+}
+.ticker-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.4); flex-shrink: 0; }
+
+/* ─── HERO ───────────────────────────────── */
+.hero {
+  background: var(--blue-deep);
+  padding: 76px 0 0; overflow: hidden; position: relative;
+}
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 75% at 88% 50%, rgba(37,99,235,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 55% at 8%  80%, rgba(37,99,235,0.07) 0%, transparent 55%);
+}
+.hero-gridlines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+.hero-layout {
+  display: grid; grid-template-columns: 7fr 5fr;
+  align-items: end; position: relative; z-index: 1;
+}
+.hero-body { padding-bottom: 72px; }
+.hero-eyebrow-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+}
+.hero-eyebrow-bar { width: 28px; height: 2px; background: var(--blue-muted); flex-shrink: 0; }
+.hero-eyebrow-text {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue-muted);
+}
+.hero h1 { color: #fff; }
+.hero h1 .accent { color: var(--blue-muted); display: block; }
+.hero-desc {
+  font-size: 16px; color: rgba(255,255,255,0.55); font-weight: 400;
+  line-height: 1.72; max-width: 500px; margin: 20px 0 36px;
+}
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.hero-bar {
+  display: flex; border-top: 1px solid rgba(255,255,255,0.09); margin-top: 56px;
+}
+.hero-bar-item {
+  flex: 1; padding: 22px 0;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.hero-bar-item:last-child { border-right: none; }
+.hero-bar-val { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.03em; display: block; }
+.hero-bar-key { font-size: 10.5px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+.hero-aside { padding-bottom: 48px; padding-left: 40px; }
+.hero-cards { display: flex; flex-direction: column; gap: 10px; }
+.hero-card {
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 9px; padding: 18px 22px;
+  transition: background 0.2s;
+}
+.hero-card:hover { background: rgba(255,255,255,0.09); }
+.hero-card-key {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue-muted); margin-bottom: 5px;
+}
+.hero-card-val { font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1.45; }
+
+/* ─── SECTION HEADER ─────────────────────── */
+.section-hd { margin-bottom: 52px; }
+.section-hd h2 { color: var(--blue-deep); margin-top: 4px; }
+.section-hd p  { max-width: 560px; margin-top: 12px; font-size: 14.5px; }
+.section-hd-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 48px; flex-wrap: wrap; gap: 16px;
+}
+
+/* ─── ABOUT ──────────────────────────────── */
+.about-layout { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
+.meta-list { margin-top: 4px; }
+.meta-item { padding: 16px 0; border-bottom: 1px solid var(--gray-200); }
+.meta-item:first-child { border-top: 1px solid var(--gray-200); }
+.meta-key  { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
+.meta-val  { font-size: 13.5px; font-weight: 500; color: var(--blue-deep); line-height: 1.5; }
+
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+.vm-card {
+  border: 1px solid var(--gray-200); border-radius: 8px; padding: 22px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vm-card:hover { border-color: var(--blue-accent); box-shadow: 0 4px 16px rgba(37,99,235,0.09); }
+.vm-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.vm-icon {
+  width: 30px; height: 30px; border-radius: 6px;
+  background: var(--blue-light); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.vm-icon svg { width: 14px; height: 14px; stroke: var(--blue-accent); }
+.vm-card h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--blue-deep); }
+.vm-card p  { font-size: 13px; line-height: 1.7; }
+
+/* ─── DEPARTMENTS ────────────────────────── */
+.dept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.dept-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: 10px;
+  overflow: hidden; transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+}
+.dept-card:hover { box-shadow: 0 8px 32px rgba(10,37,64,0.10); transform: translateY(-3px); border-color: var(--blue-accent); }
+.dept-head {
+  background: var(--blue-deep); padding: 26px 28px; position: relative; overflow: hidden;
+}
+.dept-head::after {
+  content: attr(data-num);
+  position: absolute; right: 16px; bottom: -8px;
+  font-size: 56px; font-weight: 900; color: rgba(255,255,255,0.06);
+  letter-spacing: -0.04em; line-height: 1; pointer-events: none;
+}
+.dept-icon-box {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: rgba(37,99,235,0.22); border: 1px solid rgba(37,99,235,0.35);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.dept-icon-box svg { width: 18px; height: 18px; stroke: #93C5FD; }
+.dept-head h3 { color: #fff; font-size: 16px; line-height: 1.35; position: relative; z-index: 1; }
+.dept-body { padding: 22px 28px 28px; }
+.dept-body p { font-size: 13px; line-height: 1.75; margin-bottom: 16px; }
+.pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  background: var(--gray-100); color: var(--gray-600);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.03em;
+  padding: 4px 10px; border-radius: 100px;
+}
+
+/* General section detail card */
+.general-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: 10px;
+  overflow: hidden; margin-top: 24px;
+  display: grid; grid-template-columns: 1fr 2fr;
+}
+.general-left  { background: var(--blue-deep); padding: 36px 32px; }
+.general-left h3 { color: #fff; margin-bottom: 10px; }
+.general-left p  { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.72; }
+.general-right { padding: 36px 36px; }
+.subject-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.subject-row {
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--gray-200); border-radius: 7px; padding: 12px 14px;
+  transition: border-color 0.18s, background 0.18s;
+}
+.subject-row:hover { border-color: var(--blue-accent); background: var(--blue-light); }
+.subject-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent); flex-shrink: 0; }
+.subject-name { font-size: 13px; font-weight: 500; color: var(--blue-deep); }
+
+/* ─── FACULTY ────────────────────────────── */
+.faculty-block  { margin-bottom: 52px; }
+.faculty-block:last-child { margin-bottom: 0; }
+.faculty-block-head {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+}
+.faculty-block-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+}
+.faculty-block-line { flex: 1; height: 1px; background: var(--gray-200); }
+.faculty-grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.faculty-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.fc {
+  text-align: center; padding: 20px 12px;
+  border: 1px solid var(--gray-200); border-radius: 9px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.fc:hover { border-color: var(--blue-accent); box-shadow: 0 4px 14px rgba(37,99,235,0.09); }
+.fc-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--blue-light); color: var(--blue-accent);
+  font-size: 15px; font-weight: 700; letter-spacing: 0.01em;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px; border: 1.5px solid var(--blue-border);
+  transition: background 0.2s, color 0.2s;
+}
+.fc:hover .fc-avatar { background: var(--blue-deep); color: #fff; border-color: var(--blue-deep); }
+.fc-name  { font-size: 13px; font-weight: 600; color: var(--blue-deep); margin-bottom: 3px; line-height: 1.35; }
+.fc-role  { font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
+.fc-dept  { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-accent); margin-top: 5px; }
+
+/* ─── NOTIFICATIONS ──────────────────────── */
+.notif-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: start; }
+.notif-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 18px 0; border-bottom: 1px solid var(--gray-200);
+  cursor: pointer; transition: padding-left 0.2s;
+}
+.notif-item:first-child { border-top: 1px solid var(--gray-200); }
+.notif-item:hover { padding-left: 6px; }
+.notif-indicator {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gray-400); flex-shrink: 0; margin-top: 6px;
+}
+.notif-indicator.new { background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+.notif-title { font-size: 13.5px; font-weight: 500; color: var(--blue-deep); line-height: 1.5; }
+.notif-date  { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; }
+
+.quicklinks-box {
+  background: var(--blue-deep); border-radius: 10px; padding: 28px;
+}
+.quicklinks-box-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue-muted); margin-bottom: 16px;
+}
+.ql-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 13px; color: rgba(255,255,255,0.65);
+  text-decoration: none; transition: color 0.18s;
+}
+.ql-item:last-child { border-bottom: none; }
+.ql-item:hover { color: #fff; }
+.ql-arrow { width: 14px; height: 14px; stroke: currentColor; }
+
+/* ─── ADMISSIONS ─────────────────────────── */
+.adm-layout { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
+.steps { display: flex; flex-direction: column; }
+.step {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding-bottom: 28px; position: relative;
+}
+.step:last-child { padding-bottom: 0; }
+.step::before {
+  content: '';
+  position: absolute; left: 17px; top: 38px; bottom: 0;
+  width: 1px; background: var(--gray-200);
+}
+.step:last-child::before { display: none; }
+.step-num {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: var(--blue-deep); color: #fff;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.step-body h4   { font-size: 14px; color: var(--blue-deep); margin-bottom: 4px; padding-top: 6px; }
+.step-body p    { font-size: 13px; line-height: 1.65; }
+
+.adm-card {
+  background: var(--blue-deep); border-radius: 12px; padding: 36px;
+}
+.adm-card h3 { color: #fff; font-size: 17px; margin-bottom: 22px; }
+.adm-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 13.5px;
+}
+.adm-row:last-of-type { border-bottom: none; }
+.adm-key { color: rgba(255,255,255,0.5); font-weight: 400; }
+.adm-val { color: #fff; font-weight: 600; text-align: right; }
+.adm-contact { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+.adm-contact-head {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue-muted); margin-bottom: 14px;
+}
+.adm-contact-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.65);
+  margin-bottom: 10px;
+}
+.adm-contact-item:last-child { margin-bottom: 0; }
+.adm-contact-item svg { width: 13px; height: 13px; stroke: var(--blue-muted); flex-shrink: 0; }
+
+/* ─── GRIEVANCE ──────────────────────────── */
+.grievance-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.gv-card {
+  border: 1px solid var(--gray-200); border-radius: 9px; padding: 22px 16px;
+  text-align: center; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gv-card:hover { border-color: var(--blue-accent); box-shadow: 0 4px 14px rgba(37,99,235,0.09); }
+.gv-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--blue-light); color: var(--blue-accent);
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px; border: 1.5px solid var(--blue-border);
+}
+.gv-name { font-size: 13px; font-weight: 600; color: var(--blue-deep); margin-bottom: 3px; line-height: 1.35; }
+.gv-role { font-size: 11px; color: var(--text-muted); }
+
+/* ─── CONTACT ────────────────────────────── */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.contact-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: 10px;
+  padding: 28px 28px 32px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.contact-card:hover { box-shadow: 0 4px 20px rgba(10,37,64,0.09); border-color: var(--blue-accent); }
+.contact-icon {
+  width: 44px; height: 44px; border-radius: 9px;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.contact-icon svg { width: 18px; height: 18px; stroke: var(--blue-accent); }
+.contact-card h4 {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
+}
+.contact-card p    { font-size: 13.5px; font-weight: 500; color: var(--blue-deep); line-height: 1.65; }
+.contact-card a    { color: var(--blue-accent); text-decoration: none; }
+.contact-card a:hover { text-decoration: underline; }
+
+/* ─── FOOTER ─────────────────────────────── */
+footer {
+  background: var(--blue-deep);
+  padding: 52px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-main {
+  display: grid; grid-template-columns: 3fr 2fr 2fr 2fr;
+  gap: 48px; padding-bottom: 48px;
+}
+.footer-brand-name { font-size: 15px; font-weight: 700; color: #fff; }
+.footer-brand-name span { color: var(--blue-muted); }
+.footer-brand p { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.75; margin-top: 12px; max-width: 240px; }
+.footer-col h5 {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.13em;
+  text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 14px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-col ul a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.18s; }
+.footer-col ul a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 18px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+  font-size: 11.5px; color: rgba(255,255,255,0.3);
+}
+
+/* ─── SCROLL REVEAL ──────────────────────── */
+.reveal { opacity: 1; transform: none; transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.animate-ready { opacity: 0; transform: translateY(20px); }
+.reveal.in { opacity: 1; transform: none; }
+
+
+/* ─── RESPONSIVE ─────────────────────────── */
+html, body { overflow-x: hidden; max-width: 100vw; }
+
+@media (max-width: 1024px) {
+  :root { --section-v: 64px; }
+  .container { padding: 0 24px; }
+  .hero-layout { grid-template-columns: 1fr; }
+  .hero-aside  { display: none; }
+  .hero-bar    { flex-wrap: wrap; }
+  .hero-bar-item { flex: calc(50% - 12px); border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .about-layout, .adm-layout { grid-template-columns: 1fr; gap: 40px; }
+  .dept-grid   { grid-template-columns: 1fr 1fr; }
+  .general-card { grid-template-columns: 1fr; }
+  .vm-grid     { grid-template-columns: 1fr 1fr; }
+  .faculty-grid-6 { grid-template-columns: repeat(3, 1fr); }
+  .faculty-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .notif-layout { grid-template-columns: 1fr; }
+  .grievance-grid { grid-template-columns: repeat(3, 1fr); }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .topbar-right { display: none; }
+  .nav-links   { display: none; }
+  .nav-actions .btn-outline { display: none; }
+  .hamburger   { display: flex; }
+}
+
+@media (max-width: 640px) {
+  :root { --section-v: 44px; }
+  .container { padding: 0 14px; }
+  .section   { padding: 40px 0; }
+
+  /* Typography */
+  h1 { font-size: 26px; line-height: 1.12; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 15px; }
+
+  /* Topbar */
+  .topbar { padding: 6px 0; }
+  .topbar-left { gap: 12px; }
+  .topbar-left a { font-size: 11px; }
+
+  /* Nav — compact single row */
+  .nav-inner { padding: 9px 0; gap: 8px; }
+  .nav-brand { gap: 8px; }
+  .nav-emblem { width: 30px; height: 30px; }
+  .nav-brand-name { font-size: 11.5px; line-height: 1.2; }
+  .nav-brand-sub  { display: none; }
+  /* Hide "Apply via POLYCET" button on very small screens so hamburger fits */
+  .nav-actions .btn-primary { display: none; }
+  .hamburger { display: flex; }
+
+  /* Ticker */
+  .ticker { padding: 6px 0; }
+  .ticker-item { font-size: 11px; }
+  .ticker-label { font-size: 9px; padding: 3px 8px; margin-right: 12px; }
+
+  /* Hero */
+  .hero { padding: 32px 0 0; }
+  .hero-body { padding-bottom: 32px; }
+  .hero-eyebrow-text { font-size: 9px; }
+  .hero h1 { font-size: 26px; }
+  .hero-desc { font-size: 13.5px; margin: 12px 0 20px; }
+  .hero-actions { flex-direction: column; gap: 9px; }
+  .hero-actions .btn { width: 100%; justify-content: center; font-size: 13px; padding: 12px 18px; }
+
+  /* Hero stats bar — 2x2 grid instead of stacked column */
+  .hero-bar { display: grid; grid-template-columns: 1fr 1fr; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.09); }
+  .hero-bar-item { flex: unset; padding: 14px 12px; border-right: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .hero-bar-item:nth-child(2n) { border-right: none; }
+  .hero-bar-item:nth-child(3), .hero-bar-item:nth-child(4) { border-bottom: none; }
+  .hero-bar-val { font-size: 18px; }
+  .hero-bar-key { font-size: 9px; }
+
+  /* Section header */
+  .section-hd { margin-bottom: 22px; }
+  .section-hd h2 { font-size: 20px; }
+  .section-hd p  { font-size: 13px; margin-top: 8px; }
+  .section-hd-row { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 22px; }
+
+  /* About */
+  .about-layout { grid-template-columns: 1fr; gap: 22px; }
+  .meta-item { padding: 11px 0; }
+  .meta-key { font-size: 10px; }
+  .meta-val { font-size: 13px; }
+  .vm-grid  { grid-template-columns: 1fr; gap: 10px; }
+  .vm-card  { padding: 14px; }
+
+  /* Departments */
+  .dept-grid { grid-template-columns: 1fr; gap: 12px; }
+  .dept-head { padding: 16px 18px; }
+  .dept-body { padding: 14px 18px 18px; }
+  .dept-body p { font-size: 12.5px; }
+
+  /* General subjects */
+  .general-card  { grid-template-columns: 1fr; }
+  .general-left  { padding: 20px 18px; }
+  .general-right { padding: 16px 18px; }
+  .subject-grid  { grid-template-columns: 1fr; gap: 7px; }
+  .subject-name  { font-size: 12.5px; }
+
+  /* Faculty */
+  .faculty-grid-6, .faculty-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .faculty-block { margin-bottom: 32px; }
+  .fc { padding: 13px 8px; }
+  .fc-avatar { width: 42px; height: 42px; font-size: 13px; }
+  .fc-name { font-size: 12px; }
+  .fc-role { font-size: 10.5px; }
+
+  /* Notifications */
+  .notif-layout { grid-template-columns: 1fr; gap: 22px; }
+  .notif-item   { gap: 10px; padding: 13px 0; }
+  .notif-title  { font-size: 13px; }
+  .quicklinks-box { padding: 18px; }
+
+  /* Admissions */
+  .adm-layout { grid-template-columns: 1fr; gap: 22px; }
+  .adm-card   { padding: 20px 16px; }
+  .adm-card h3 { font-size: 15px; }
+  .adm-row    { font-size: 12.5px; padding: 10px 0; }
+  .step       { gap: 12px; padding-bottom: 16px; }
+  .step-num   { width: 28px; height: 28px; font-size: 11px; }
+  .step-body h4 { font-size: 13px; }
+  .step-body p  { font-size: 12.5px; }
+
+  /* Grievance */
+  .grievance-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .gv-card { padding: 14px 10px; }
+  .gv-avatar { width: 40px; height: 40px; font-size: 12px; margin-bottom: 8px; }
+  .gv-name { font-size: 12px; }
+  .gv-role { font-size: 10px; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 10px; }
+  .contact-card { padding: 18px; }
+  .contact-icon { width: 36px; height: 36px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 10px; }
+  .contact-card p  { font-size: 13px; }
+
+  /* Footer */
+  .footer-main { grid-template-columns: 1fr; gap: 22px; padding-bottom: 26px; }
+  footer { padding: 28px 0 0; }
+  .footer-brand-name { font-size: 13px; }
+  .footer-brand p    { font-size: 12px; }
+  .footer-col h5     { font-size: 9px; }
+  .footer-col ul a   { font-size: 12px; }
+  .footer-bottom { flex-direction: column; gap: 4px; font-size: 11px; padding: 12px 0; }
+
+  /* Mobile nav drawer */
+  .mobile-nav-links li a { font-size: 13.5px; padding: 12px 10px; }
+  .mobile-nav-footer .btn { font-size: 12.5px; }
+
+  /* Admission banner */
+  .adm-banner-inner { flex-direction: column !important; gap: 16px !important; padding: 20px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     TOP BAR
+════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <a href="tel:9010222170">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.88v2.04z"/></svg>
+          9010222170
+        </a>
+        <a href="mailto:gpt170@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>gpt170@gmail.com</a>
+      </div>
+      <div class="topbar-right">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Mon – Sat &nbsp;·&nbsp; 9:00 AM – 5:00 PM
+        </span>
+        <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank">Admissions Open 2025–26 — Apply via AP POLYCET</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav id="main-nav">
+  <div class="container">
+    <div class="nav-inner">
+
+      <!-- Brand -->
+      <a href="https://govtpolydharmavaram.ac.in/" class="nav-brand">
+        <div class="nav-emblem" id="nav-emblem"><img src="data:image/png;base64,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" alt="Govt. Polytechnic Dharmavaram Logo" style="width:44px;height:48px;object-fit:contain;display:block;"></div>
+        <div>
+          <div class="nav-brand-name">Govt. Polytechnic Dharmavaram</div>
+          <div class="nav-brand-sub">Affiliated to SBTET · Andhra Pradesh</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links">
+        <li><a href="https://govtpolydharmavaram.ac.in/about" target="_blank">About</a></li>
+        <li><a href="#departments">Departments</a></li>
+        <li><a href="#faculty">Faculty</a></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank">Admissions</a></li>
+        <li><a href="https://govtpolydharmavaram.ac.in/contact" target="_blank">Contact</a></li>
+      </ul>
+
+      <!-- Desktop CTAs + Hamburger -->
+      <div class="nav-actions">
+        <a href="https://govtpolydharmavaram.ac.in/admissions" target="_blank" class="btn btn-outline" style="font-size:12px;padding:8px 14px;">Notifications</a>
+        <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-primary" style="font-size:12px;padding:8px 14px;">
+          Apply via POLYCET
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Menu</span>
+      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="https://govtpolydharmavaram.ac.in/" target="_blank">Home <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/about" target="_blank">About <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/vision-and-mission" target="_blank">Vision &amp; Mission <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/principals-message" target="_blank">Principal's Message <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="#departments">Departments <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="#faculty">Faculty <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/academics" target="_blank">Academics <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/examinations" target="_blank">Examinations <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/fee-structure" target="_blank">Fee Structure <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="#notifications">Notifications <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/placements" target="_blank">Placements <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/gallery" target="_blank">Gallery <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/aicte" target="_blank">AICTE <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+      <li><a href="https://govtpolydharmavaram.ac.in/contact" target="_blank">Contact <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-primary">
+        Apply via AP POLYCET
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-outline">Check Admission Status</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TICKER
+════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="container">
+    <div class="ticker-inner">
+      <div class="ticker-label">Notice</div>
+      <div class="ticker-track">
+        <div class="ticker-scroll">
+          <span class="ticker-item">Website Launched — Government Polytechnic Dharmavaram</span>
+          <span class="ticker-sep"></span>
+          <span class="ticker-item">Admissions Open for Academic Year 2025–26</span>
+          <span class="ticker-sep"></span>
+          <span class="ticker-item">AICTE Feedback Facility — Share Your Feedback via the AICTE Portal</span>
+          <span class="ticker-sep"></span>
+          <span class="ticker-item">AP Polygrievance App — Register Grievances Online</span>
+          <span class="ticker-sep"></span>
+          <!-- duplicate for seamless loop -->
+          <span class="ticker-item">Website Launched — Government Polytechnic Dharmavaram</span>
+          <span class="ticker-sep"></span>
+          <span class="ticker-item">Admissions Open for Academic Year 2025–26</span>
+          <span class="ticker-sep"></span>
+          <span class="ticker-item">AICTE Feedback Facility — Share Your Feedback via the AICTE Portal</span>
+          <span class="ticker-sep"></span>
+          <span class="ticker-item">AP Polygrievance App — Register Grievances Online</span>
+          <span class="ticker-sep"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-gridlines"></div>
+  <div class="container">
+    <div class="hero-layout">
+
+      <div class="hero-body">
+        <div class="hero-eyebrow-row">
+          <div class="hero-eyebrow-bar"></div>
+          <span class="hero-eyebrow-text">State Board of Technical Education and Training, AP</span>
+        </div>
+        <h1>
+          Government
+          <span class="accent">Polytechnic</span>
+          Dharmavaram
+        </h1>
+        <p class="hero-desc">
+          Tarakaramapuram, Dharmavaram – 515672, Anantapuramu District, Andhra Pradesh.<br>
+          Diploma education committed to transforming students into skilled engineers and responsible citizens.
+        </p>
+        <div class="hero-actions">
+          <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-primary">
+            Apply via AP POLYCET
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#departments" class="btn btn-white">Explore Courses</a>
+          <a href="#notifications" class="btn btn-ghost">Notifications</a>
+        </div>
+
+        <div class="hero-bar">
+          <div class="hero-bar-item">
+            <span class="hero-bar-val">SBTET</span>
+            <div class="hero-bar-key">Affiliated Board</div>
+          </div>
+          <div class="hero-bar-item">
+            <span class="hero-bar-val">AICTE</span>
+            <div class="hero-bar-key">Approved</div>
+          </div>
+          <div class="hero-bar-item">
+            <span class="hero-bar-val">2</span>
+            <div class="hero-bar-key">Departments</div>
+          </div>
+          <div class="hero-bar-item">
+            <span class="hero-bar-val">3 Yrs</span>
+            <div class="hero-bar-key">Diploma Duration</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-aside">
+        <div class="hero-cards">
+          <div class="hero-card">
+            <div class="hero-card-key">Phone</div>
+            <div class="hero-card-val">9010222170</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-key">Email</div>
+            <div class="hero-card-val"><a href="mailto:gpt170@gmail.com">gpt170@gmail.com</a></div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-key">Office Hours</div>
+            <div class="hero-card-val">Mon – Sat &nbsp;·&nbsp; 9:00 AM – 5:00 PM</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-key">Address</div>
+            <div class="hero-card-val">Tarakaramapuram, Dharmavaram – 515672,<br>Anantapuramu Dist., AP</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-layout">
+
+      <div class="reveal">
+        <span class="eyebrow">Institution Details</span>
+        <div class="meta-list">
+          <div class="meta-item"><div class="meta-key">Institution Type</div><div class="meta-val">Government Polytechnic</div></div>
+          <div class="meta-item"><div class="meta-key">Affiliation</div><div class="meta-val">State Board of Technical Education and Training, AP</div></div>
+          <div class="meta-item"><div class="meta-key">Approval</div><div class="meta-val">AICTE Approved</div></div>
+          <div class="meta-item"><div class="meta-key">Location</div><div class="meta-val">Tarakaramapuram, Dharmavaram – 515672, Anantapuramu District, Andhra Pradesh</div></div>
+          <div class="meta-item"><div class="meta-key">Contact</div><div class="meta-val">9010222170 &nbsp;·&nbsp; <a href="mailto:gpt170@gmail.com">gpt170@gmail.com</a></div></div>
+          <div class="meta-item"><div class="meta-key">Office Hours</div><div class="meta-val">Mon – Sat &nbsp;·&nbsp; 9:00 AM – 5:00 PM</div></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <span class="eyebrow">About the Institution</span>
+        <h2>Welcome to Government Polytechnic, Dharmavaram</h2>
+        <hr class="rule-accent">
+        <p style="margin-top:20px">Government Polytechnic, Dharmavaram is affiliated to the State Board of Technical Education and Training, Andhra Pradesh. The institution is committed to providing quality technical education to students of the region.</p>
+        <p style="margin-top:14px">The college offers diploma programmes in Computer Engineering and Electronics &amp; Communications Engineering, preparing students with the technical skills and ethical values needed to serve society and industry.</p>
+
+        <div class="vm-grid">
+          <div class="vm-card">
+            <div class="vm-card-head">
+              <div class="vm-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <h4>Vision</h4>
+            </div>
+            <p>To be a leading Polytechnic that provides a transformative education to create worthful Engineers, skilled technicians, and to generate new knowledge for society and industry.</p>
+          </div>
+          <div class="vm-card">
+            <div class="vm-card-head">
+              <div class="vm-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <h4>Mission</h4>
+            </div>
+            <p>To provide an education that transforms students through rigorous coursework, with an understanding of the needs of society and industry, and imbibing a spirit of entrepreneurship and innovation.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     DEPARTMENTS
+════════════════════════════════════════ -->
+<section class="section section-alt" id="departments">
+  <div class="container">
+    <div class="section-hd reveal">
+      <span class="eyebrow">Academic Departments</span>
+      <h2>Departments &amp; Courses Offered</h2>
+      <hr class="rule-accent">
+      <p>Diploma programmes offered across the following departments, each with a strong focus on technical knowledge and industry-relevant skills.</p>
+    </div>
+
+    <div class="dept-grid">
+
+      <!-- CSE -->
+      <div class="dept-card reveal">
+        <div class="dept-head" data-num="01">
+          <div class="dept-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Department of Computer Engineering</h3>
+        </div>
+        <div class="dept-body">
+          <p><strong style="color:var(--blue-deep)">Vision:</strong> Develop Computer Engineers to be technologically adept, innovative, self-motivated and responsible citizens with human values, high quality skills and to contribute significantly towards ever-changing Computer Technologies.</p>
+          <p><strong style="color:var(--blue-deep)">Mission:</strong> To provide opportunity to Diploma students who are capable of playing a pivotal role in wide aspects of modern Computer Engineering and to train students with intensive hands-on exposure.</p>
+          <div class="pill-row">
+            <span class="pill">Diploma in C.E.</span>
+            <span class="pill">3 Years</span>
+            <span class="pill">SBTET Affiliated</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ECE -->
+      <div class="dept-card reveal">
+        <div class="dept-head" data-num="02">
+          <div class="dept-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+          </div>
+          <h3>Department of Electronics &amp; Communications Engineering</h3>
+        </div>
+        <div class="dept-body">
+          <p><strong style="color:var(--blue-deep)">Vision:</strong> Develop ECE professionals competent to face global challenges, blending technical knowledge and skills with ethics and values, to serve the society and to better it for a happy and comfortable living.</p>
+          <p><strong style="color:var(--blue-deep)">Mission:</strong> To provide a competitive learning environment, nurture leadership qualities, encourage the spirit of inquisition to promote innovation and entrepreneurship, and foster effective stakeholder interactions.</p>
+          <div class="pill-row">
+            <span class="pill">Diploma in E.C.E.</span>
+            <span class="pill">3 Years</span>
+            <span class="pill">SBTET Affiliated</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- General -->
+      <div class="dept-card reveal">
+        <div class="dept-head" data-num="03">
+          <div class="dept-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>General Section</h3>
+        </div>
+        <div class="dept-body">
+          <p>An integral part of this institution since its inception. Strongly committed to providing a challenging education in core subjects like Mathematics, Physics, Chemistry and English — and fostering Communication and Soft Skills.</p>
+          <p>The Department is well established with Chemistry, Physics, and English Language Laboratories that enable hands-on learning and presentation skills.</p>
+          <div class="pill-row">
+            <span class="pill">Mathematics</span>
+            <span class="pill">Physics</span>
+            <span class="pill">Chemistry</span>
+            <span class="pill">English</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- General section subject detail -->
+    <div class="general-card reveal">
+      <div class="general-left">
+        <h3>General Section — Core Subjects</h3>
+        <p>The Department strives rigorously towards shaping students competent enough to get a job and to acquire all the essential employability skills. It is strongly committed to providing a challenging education in core subjects and stimulating real knowledge beyond course examinations.</p>
+      </div>
+      <div class="general-right">
+        <span class="eyebrow" style="margin-bottom:18px;display:block">Subjects Taught</span>
+        <div class="subject-grid">
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">Mathematics</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">Physics</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">Chemistry</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">English Language</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">Physics Laboratory</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">Chemistry Laboratory</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">English Language Laboratory</div></div>
+          <div class="subject-row"><div class="subject-dot"></div><div class="subject-name">Communication &amp; Soft Skills</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FACULTY
+════════════════════════════════════════ -->
+<section class="section" id="faculty">
+  <div class="container">
+    <div class="section-hd reveal">
+      <span class="eyebrow">Teaching Staff</span>
+      <h2>Our Faculty</h2>
+      <hr class="rule-accent">
+      <p>Experienced and dedicated professionals across all departments, committed to academic excellence and student development.</p>
+    </div>
+
+    <!-- CSE -->
+    <div class="faculty-block reveal">
+      <div class="faculty-block-head">
+        <span class="faculty-block-label">Department of Computer Engineering</span>
+        <div class="faculty-block-line"></div>
+      </div>
+      <div class="faculty-grid-6">
+        <div class="fc"><div class="fc-avatar">NB</div><div class="fc-name">N. Balaswamy</div><div class="fc-role">Head of Department</div><div class="fc-dept">CSE</div></div>
+        <div class="fc"><div class="fc-avatar">PM</div><div class="fc-name">P. Madhu Krishna</div><div class="fc-role">Lecturer</div><div class="fc-dept">CSE</div></div>
+        <div class="fc"><div class="fc-avatar">AA</div><div class="fc-name">A. Anusha</div><div class="fc-role">Lecturer</div><div class="fc-dept">CSE</div></div>
+        <div class="fc"><div class="fc-avatar">PK</div><div class="fc-name">P. Kiran Kumar</div><div class="fc-role">Lecturer</div><div class="fc-dept">CSE</div></div>
+        <div class="fc"><div class="fc-avatar">AC</div><div class="fc-name">A. Chakrapani Reddy</div><div class="fc-role">Lecturer</div><div class="fc-dept">CSE</div></div>
+        <div class="fc"><div class="fc-avatar">BB</div><div class="fc-name">B. Bala Joshi</div><div class="fc-role">Senior Lecturer</div><div class="fc-dept">CSE</div></div>
+      </div>
+    </div>
+
+    <!-- ECE -->
+    <div class="faculty-block reveal">
+      <div class="faculty-block-head">
+        <span class="faculty-block-label">Department of Electronics &amp; Communications Engineering</span>
+        <div class="faculty-block-line"></div>
+      </div>
+      <div class="faculty-grid-4">
+        <div class="fc"><div class="fc-avatar">GH</div><div class="fc-name">Dr. G. Hemanja</div><div class="fc-role">Head of Department</div><div class="fc-dept">ECE</div></div>
+        <div class="fc"><div class="fc-avatar">MU</div><div class="fc-name">Mallela Umamaheswari</div><div class="fc-role">Lecturer</div><div class="fc-dept">ECE</div></div>
+        <div class="fc"><div class="fc-avatar">KP</div><div class="fc-name">K. Parameswara Reddy</div><div class="fc-role">Lecturer</div><div class="fc-dept">ECE</div></div>
+        <div class="fc"><div class="fc-avatar">PK</div><div class="fc-name">P. M. Kalyani</div><div class="fc-role">Senior Lecturer</div><div class="fc-dept">ECE</div></div>
+      </div>
+    </div>
+
+    <!-- General -->
+    <div class="faculty-block reveal">
+      <div class="faculty-block-head">
+        <span class="faculty-block-label">General Section</span>
+        <div class="faculty-block-line"></div>
+      </div>
+      <div class="faculty-grid-4">
+        <div class="fc"><div class="fc-avatar">PH</div><div class="fc-name">Dr. P. Haribabu</div><div class="fc-role">Lecturer in Chemistry</div><div class="fc-dept">General</div></div>
+        <div class="fc"><div class="fc-avatar">BP</div><div class="fc-name">B. Pradeep Kumar</div><div class="fc-role">Lecturer in Mathematics</div><div class="fc-dept">General</div></div>
+        <div class="fc"><div class="fc-avatar">DM</div><div class="fc-name">Dandala Mallikarjuna</div><div class="fc-role">Lecturer in Physics</div><div class="fc-dept">General</div></div>
+        <div class="fc"><div class="fc-avatar">YR</div><div class="fc-name">Y. Rajesh</div><div class="fc-role">Sr. Lecturer in English</div><div class="fc-dept">General</div></div>
+      </div>
+    </div>
+
+    <!-- Office -->
+    <div class="faculty-block reveal">
+      <div class="faculty-block-head">
+        <span class="faculty-block-label">Office Staff</span>
+        <div class="faculty-block-line"></div>
+      </div>
+      <div class="faculty-grid-6">
+        <div class="fc"><div class="fc-avatar">PS</div><div class="fc-name">P. Suseela</div><div class="fc-role">Office Superintendent</div><div class="fc-dept">Office</div></div>
+        <div class="fc"><div class="fc-avatar">MM</div><div class="fc-name">M. Madhavi</div><div class="fc-role">Senior Assistant</div><div class="fc-dept">Office</div></div>
+
+        <div class="fc"><div class="fc-avatar">JS</div><div class="fc-name">Jaffer Sadiq Shaik</div><div class="fc-role">Junior Assistant</div><div class="fc-dept">Office</div></div>
+        <div class="fc"><div class="fc-avatar">DD</div><div class="fc-name">Dasari Divya Bharathi</div><div class="fc-role">Junior Assistant</div><div class="fc-dept">Office</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     NOTIFICATIONS
+════════════════════════════════════════ -->
+<section class="section section-alt" id="notifications">
+  <div class="container">
+    <div class="section-hd-row reveal">
+      <div>
+        <span class="eyebrow">Announcements</span>
+        <h2>Latest Notifications</h2>
+      </div>
+      <a href="#" class="btn btn-outline" style="font-size:12.5px;padding:8px 18px;">View All</a>
+    </div>
+
+    <div class="notif-layout">
+      <div class="reveal">
+        <div class="notif-item">
+          <div class="notif-indicator new"></div>
+          <div>
+            <div class="notif-title">Website Launched — Government Polytechnic Dharmavaram Official Website is now live.</div>
+            <div class="notif-date">New &nbsp;·&nbsp; 2023</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-indicator new"></div>
+          <div>
+            <div class="notif-title">Admissions Open for the Academic Year 2025–26 — Applications are being accepted for Diploma programmes.</div>
+            <div class="notif-date">New &nbsp;·&nbsp; 2025</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-indicator"></div>
+          <div>
+            <div class="notif-title">AICTE Feedback Facility — Students and stakeholders can share feedback through the AICTE portal.</div>
+            <div class="notif-date">Ongoing</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-indicator"></div>
+          <div>
+            <div class="notif-title">AP Polygrievance App — Students can register grievances online through the AP Polygrievance mobile application.</div>
+            <div class="notif-date">Ongoing</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-indicator"></div>
+          <div>
+            <div class="notif-title">Placements — Placement assistance is available for eligible diploma students. Contact the office for details.</div>
+            <div class="notif-date">Ongoing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="quicklinks-box">
+          <div class="quicklinks-box-title">Quick Links</div>
+          <a href="https://govtpolydharmavaram.ac.in/academics" target="_blank" class="ql-item">Academics<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="ql-item">AP POLYCET — Apply<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="ql-item">POLYCET Status<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://govtpolydharmavaram.ac.in/examinations" target="_blank" class="ql-item">Examinations<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://govtpolydharmavaram.ac.in/fee-structure" target="_blank" class="ql-item">Fee Structure<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://govtpolydharmavaram.ac.in/placements" target="_blank" class="ql-item">Placements<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://govtpolydharmavaram.ac.in/gallery" target="_blank" class="ql-item">Gallery<svg class="ql-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ADMISSIONS
+════════════════════════════════════════ -->
+<section class="section" id="admissions">
+  <div class="container">
+    <div class="section-hd reveal">
+      <span class="eyebrow">Admissions 2025–26</span>
+      <h2>Admission Information</h2>
+      <hr class="rule-accent">
+      <p>Government Polytechnic Dharmavaram admits students into diploma programmes as per the guidelines of SBTET, Andhra Pradesh. Admissions are conducted through the official AP POLYCET process.</p>
+    </div>
+
+    <!-- POLYCET Banner -->
+    <div class="reveal" style="margin-bottom:52px;">
+      <div style="background:var(--blue-deep);border-radius:12px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border:1px solid rgba(255,255,255,0.08);">
+        <div style="display:flex;align-items:flex-start;gap:20px;">
+          <div style="width:48px;height:48px;background:rgba(37,99,235,0.25);border:1px solid rgba(37,99,235,0.4);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 5 2 9l10 4 10-4z"/><path d="M6 11v5a6 6 0 0012 0v-5"/></svg>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--blue-muted);margin-bottom:6px;">AP POLYCET — Official Admission Portal</div>
+            <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:6px;">Apply &amp; Check Admission Status Online</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;">All applications, hall tickets, rank cards, counselling schedules, seat allotments<br>and admission status are managed through the official AP POLYCET portal.</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
+          <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-primary" style="justify-content:center;">
+            Apply Now — AP POLYCET
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-ghost" style="justify-content:center;text-align:center;">
+            Check Admission Status
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="adm-layout">
+
+      <div class="reveal">
+        <span class="eyebrow" style="margin-bottom:20px;display:block">How to Apply</span>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Check Eligibility</h4>
+              <p>Completed 10th class (SSC) or equivalent examination from a recognized board. Age and other criteria as per SBTET norms.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>AP POLYCET Entrance</h4>
+              <p>Qualify in the AP Polytechnic Common Entrance Test (AP POLYCET) conducted by SBTET, Andhra Pradesh.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Counselling &amp; Allotment</h4>
+              <p>Participate in the web counselling process. Seats are allotted based on POLYCET rank and reservation norms.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>Document Verification</h4>
+              <p>Report to the college with all original certificates for verification and complete the admission formalities.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <h4>Fee Payment &amp; Enrolment</h4>
+              <p>Pay the prescribed fee as per SBTET norms and complete enrolment to confirm your seat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="adm-card">
+          <h3>Programme Details</h3>
+          <div class="adm-row"><span class="adm-key">Programme</span><span class="adm-val">Diploma (3 Years)</span></div>
+          <div class="adm-row"><span class="adm-key">Affiliation</span><span class="adm-val">SBTET, Andhra Pradesh</span></div>
+          <div class="adm-row"><span class="adm-key">Approval</span><span class="adm-val">AICTE Approved</span></div>
+          <div class="adm-row"><span class="adm-key">Branches</span><span class="adm-val">C.E. &nbsp;·&nbsp; E.C.E.</span></div>
+          <div class="adm-row"><span class="adm-key">Admission Via</span><span class="adm-val">AP POLYCET</span></div>
+          <div class="adm-row"><span class="adm-key">Lateral Entry</span><span class="adm-val">Eligible for B.Tech 2nd Year</span></div>
+          <div class="adm-row"><span class="adm-key">Placements</span><span class="adm-val">Support Available</span></div>
+          <div class="adm-contact">
+            <div class="adm-contact-head">Contact Admissions</div>
+            <div class="adm-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.88v2.04z"/></svg>
+              9010222170
+            </div>
+            <div class="adm-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:gpt170@gmail.com">gpt170@gmail.com</a>
+            </div>
+            <div class="adm-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Tarakaramapuram, Dharmavaram – 515672
+            </div>
+            <div style="margin-top:16px;">
+              <a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;font-size:13px;padding:10px 16px;">
+                Open AP POLYCET Portal
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     GRIEVANCE CELL
+════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-hd reveal">
+      <span class="eyebrow">Student Support</span>
+      <h2>Grievance Redressal Cell</h2>
+      <hr class="rule-accent">
+      <p>Constituted to address student grievances in a fair and timely manner. Students may also use the AP Polygrievance App to register complaints online.</p>
+    </div>
+    <div class="grievance-grid reveal">
+      <div class="gv-card"><div class="gv-avatar">JS</div><div class="gv-name">Sri. J.V. Suresh Babu</div><div class="gv-role">Member</div></div>
+      <div class="gv-card"><div class="gv-avatar">MK</div><div class="gv-name">Smt. P. Mary Kalyani</div><div class="gv-role">Member</div></div>
+      <div class="gv-card"><div class="gv-avatar">MI</div><div class="gv-name">Sri. S. Mahammad Irshad</div><div class="gv-role">Member</div></div>
+      <div class="gv-card"><div class="gv-avatar">PM</div><div class="gv-name">Sri. P. Madhu Krishna</div><div class="gv-role">Member</div></div>
+      <div class="gv-card"><div class="gv-avatar">DM</div><div class="gv-name">Sri. D. Mallikarjuna</div><div class="gv-role">Member</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-hd reveal">
+      <span class="eyebrow">Contact Us</span>
+      <h2>Get in Touch</h2>
+      <hr class="rule-accent">
+    </div>
+    <div class="contact-grid reveal">
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h4>Address</h4>
+        <p>Government Polytechnic, Tarakaramapuram, Dharmavaram – 515672, Anantapuramu District, Andhra Pradesh.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.88v2.04z"/></svg>
+        </div>
+        <h4>Phone &amp; Email</h4>
+        <p><a href="tel:9010222170">9010222170</a><br><a href="mailto:gpt170@gmail.com">gpt170@gmail.com</a></p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h4>Office Hours</h4>
+        <p>Monday to Saturday<br>9:00 AM – 5:00 PM<br><span style="font-size:13px;color:var(--text-muted);font-weight:400">Closed on Sundays &amp; Public Holidays</span></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA8CAYAAAAt3km7AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAfnElEQVR42q2bd2AU17X/PzOzRatVL6gCQh2EKKJXY8ANg4HYjmsMJLZjE+MStzw7dlxeHDt27MRJMLgX3HCnN9FBICRASAL1LiQkraRV2Toz9/fHSgsY+9kv7zf/7M7s3Dv3zD3le77nrCSEEPwHhxACIQSSJCFJ0iW/SZJEZ0cPf3r4Yzraehm8RZIlVK/GNUsmsPzeK9B1gSxfOn7wU5bl/2R5/EejdE1HkiRkWb5EKABd9y2s+Hg9uZtPMTw5hvSRiaSkx5GRNRS3S+WrTw6haRrfH37hy5JlGV0X/EfvXvwvDl3XhabpQgghvF6veO3P34jHf/euEMJ3Xff9JDweVWiaLp577FOxaMazl8xz7HCFGB27UlSWNwtN1YSqakIIITTN91l8slbccd0r4tjhCv+YwXt+7mH437wE35uE3duKeOmpL+ixO+npdhIXH84DTyxB9WoYjApGowLAsbwKJs9MR9cFqqohy76dSB+VgNVq5kR+Danp8QBomo4sS3TZenn4znew2x3ceePrXLloPA/9cQlxCRH//3dM13Wh67qorz0nHvzNWjE69l7xyN1vi452u9j05VExNGC52PxNvv+tV5e3iHf/uU0kW5eL3ZuPC11VherxCqFpQvP6PlcsfkVcOeEJsX9nsehot/ufdcd1r4i5Y58QXZ19Yn9uiZiX86SYOfJRse6tXKGqql8rfuqQfo7z0DUdWZEpOFLB0tkv8MqbK7hp+WX+319+9is+XLOba5dMoPh4La1tfYQMCWfWlWN45NklBMswaEragGEfLmjkXy98S21pPcLjZXTOcCRJofBINet3PU5aZsLATmr8Ys6fkQ0yX+56wr/rP3X8LFWUFRkhBBOnpjN5VjqnTtRz03L86vXIHxfTfq6b+lYni+++mpyUYDIsboJ72vF+9A7OHjuOnn40TccabMUQZCUnKpqPn5nBOdMiTjW7yNtfztEdJ3h5zTLSMhPwen1z2zp6OdvcxZN//iWKIqNpOory04JJP9fd+yaUWff2bl57/lt2nXyB8DAruq4jKz6b4ng+av4RdFs7LS6JrqAIivoMuC2BLLlqPCHWAL7adhypr4+5iRZ6KqsI8vQTnRiLcfo0yJkKigEhBLqqoRgNvPOv7ax9bTs7C58nNMzq95r/0Y4NutgLt12SJIQQLP7lFF750zd8+cF+7npwAUJR6Nm8CX3fbjoUK67xE/nUk4KaGMZNV2ZTs78cq9lAwPhxmGSJ/btbcQRptMbEY4idhKGvmyuDXbi+2UXwOx8TcdksrL+8CcVowO1088nbe7l60XhCw6yoqobBoAz4hvOxVFHknxfHZFlCUWS/MJqq+4Vb87etqG4PqRMzcVZVYfv9g7iPF/JR4izezVpA0NVXYwy1crSgEt3Ww9KsRKJ1mRBZQu2DWGHg3bsux9jdQ5xRpanbSVVCBp+MXUTg40/QUdtIxwOrcB47imQxM3ZCEts2FHLqRB0Gg4Lq1dA0HUk6v86fVMVBFFBaVEdZSTOz52cRHRPmv/nFp9bz5qtbeXvHn5jlKkNs+o6vh04n6MorcNj7Wb/lKNdMTCYhPIqYISHIwR565E7q7eeQzBqarhOAmaSIWIYo0Zw83kXSkEi2FZYRYJZYefMMXtlYQkp7LVMObyBq+mQsv76LB5atYf/2ItZteYwxOSP8gbzkRD1nShpYctM0jCajz0FJPyIYCJYveY1De84QExfK8JQYrl06ibrqc7y/egdvbf8jlzUeoGZ3Hl9MvYVuxUxVWS13LZpAfZOTkSODabRUUtBZgt3bT7ASRExgOMFKIJIk0ac6aenvxK72EhZgYUJUJkOd6XQ1ymSkhvDq50dITY1nbHIUQz95k2ERFoKefJoHl63h0J5SnnzxFk4X1bMvt5Tuzj46Wu28/uFvWXTDVL8fuEiwwYs7Nh7n/mVref+7h/B6NbZ+XUD+4Qraznby968fZW7jfk4fOIHr8WeoqW3jg435XJadytwpIzhlzGd781FSA4eyIHE64yIzsBjMP6gqqq5R0lnN1uYjnLKXMzU2iysC5nGyxMatC0axq6Caf++p44muQ2RaVKxPPccjd65l23cnGT85mRlzRjJ/0Xje//dO8g6Usz3/eYxGAzAAyXzhDEDgcXu5Yd5fGD1uOH/593L/ItxON519KpFHdlC3ZRfvzbyDhqqz3HblSMwEEJsOL5a9S6xhCA+Nvpl4a9R5byr0S7CeJIEiKf7zHo+D1We+4nD7SZ6feicJjhSe/ngXt8/LwhUUTNRb/yA1IRzTfQ9yru4cCUkx/rFnG20snv08q/5rEXfcPe/8rl2Iw7Z9VyBipdvEnu1FQgghXC6PDzEIIfSKM6Lpjl+Joopm8caG42Ll3zaIb3KrRF7nSXHV9pUit/mY+L8eJzuqxMKdD4o3SzeIxqYecaysSfz25c3igXcOivK7fit6t231oRtVFV6vKlSvb90rlr4mZmc9JpxOlx8pGXxe0BeAp87K4KYVs3noN2/xzpcPkDMlFV3T0b1eWl75GwemLSZvbxXXZEcTa0knfpyLp4+9xR9HPsLUmBHo6Hg9Kh63B0mC7wdIg8GApmm+WOTbOwQCRZYxWQIYG5nCP3Oe5rfHniM+Opjm4kiMssrlmVGYZ/wXrleexZgzEVNkBIYBW/rvxz8l/1A5f13za0wmI0IXSLJ03saE8KmIrus8es+7bPuukDc/WcmMedl0f/YZjppqVqctoKKoivEpcdywOJnfFb7AqmEroS8AR3s1mfGxVNfUYjGbkWQZn2gS4MurmpqbiY6Kwmwyo2rqgNootLe3M2P6VOoIouVcB8HBFl6se5nXpt1Hf3UgxTXN2E3BXF1zkAzFSfjDj+JyunnhiS/47IP9rP30d1x+1diLg/cPgV0hhHhgxRoxJe0R0dlqE+2rVorc7UdF/bku8dePD4q6xh6xIu9Zsa3pkKizaeKtAyfF2aYm8eXX34pTxSU/qmpH8o8Kl8t1yfWenh7xwUfrRI2tV5RXVYpNB06K/c1lYume34smW5d4cu1uUdHYIdZ8my9sq+4Vele7+PyTPJEUuEIc2lvqS2u86kVzyt9PSwaTxKjoYOIzhxFcfoImYzCrT3bx9jdHyIgZwin5BMIjcVXCdMxqG0pfDwXFpUSGhzFq5EhUzRezBpGBPvBd13U8Ho//+uC14OBgxmZnc2rfTmqqa5H6zjIrPoOc8NGsa9rA9dNG4XT0MW5sCmVRybBzG8NHJxEaaiE2IRxdFwMa8gPIQwgfigcfuN27o4QZczKgqBB71gR+OTOd5k4XEZEBfFm3i4eybkEIQW5uLleNGsrVc2YwZ85lKIqMQVFQZBkGMuEL6QPpB645XS7Gjh3D/KuuIjUlGVkxcqqomIeyb+VIxylC4yTW76nmvY3HaUodg73gBNlpkQSGWNiz7RQIX753ofeVfYF5AKIoMooi09Jso729j8kZ4XjbbZyNTCTEoPHX316JHGsHTWFMZCog0IzBaEHhVHe6OVF7jpKzXZysP0dliw3pAvcxuDsX7h7A/gOHOJSXT1V1LUIXpKakkJqcjMPjwiqbSbUOI6/7JDkjEtBdDmqUEOxOL4G97YyblsnR/eXIiozJZPBDQKELlGeeeeYZSZJQvSqlRfV8+2kef3v2a4Q5gAduzODssZMUjpjAjsNlmAmgIeQ00YYopgwZhSRJbD50gkONLpAUYq06XefqkM1h7D3dRFpsCCZF8e+OrbODoYmJyLLiywpkmXNtbaz/8iu6urvp6uwkPj6ezk4bALGxMbhUlRO9pWTJoxkaayErYyiUlhATE0pv7HDefOk7mhpsuN0qoWGBBIdYkCQJg65rrHl1KxvX59PWaic6LpTJ01JYdNtsAuwVhCTGkxgbRk5CNnMnpbPy8HfcnHwF0sB+jI0LwhkZSUhIAPERRoZbAgiJi0U1SOQVVhJqCmDmtJFUVNRQWFiMo1clKyuDsPAQdF0wZfIkauvq+Gz9F0ybNp3LL5+Dx+PFYrEgITE6PJlvW3YTHW1i3+5Wjuyr56nQSFyVtVx7/W3o/7iN3TtL+csTn6OpOqPGDePuB6/CgCSzYX0+8YkR/P29u0kbGe+nvPrXH6FFleno81LT3EJkaCiq7CXWEsUg3lQMJq4cGc3R0018WmTDpQo012ZUj8rIEXEkZsewYcNGZNlJQpJGRfNWik4fZuLYWUyekoPH42HBNVfT0NiEEILenh4cDgfR0b5nxASG4/aqWMNl3KrM7FGxiPZOPB0dhFgM3HrXfG69az493Q7yD5fz0K/fZsrMdAyyJBEUEsDonOFkZCWiaTqqx4tsMKBoGl0OFQEkRgfT1etEoBKgmPy2ExwcxOnKZqor2/G63LgdKg6Hl2Hx4fzi2snk7t7N3HmzqOrv4IsTDaSlJpCg53GmsoD4hFjMZhOVVVWMykgnITGRyKgIiktKCA8PB8CkGDEo0G7vI3NoGIawEBxtCqiqz+F5vaAohIQFMveqcUTHhhIcZvUlmiazAafD7c/FdN1n7P0ejRlZCXQEmzi4v4kls7N494SOJrQLBAtBVVXuWXbFJUC3q9tOc3MLB/cfZr95CC+teog7HnuOVdfOZ3igm+bmFqZMmUBUVOSA4es4nS50XcMaGDiANQWaJogMttLVew5zgJf0QAO60xf4BTDIt3q9Kl6PRoDZ6POKMhJF+TWUnKzH5fKgGI0oikxQTCSnS+uQgNTEcPYVNBFpDaXF2elffGJiIufa2hECVE1D13U0XUfTdIKDrMTFx7Hhu00ENpTx8MuvMn90IjlxM+ixmRkyJMLvon2e2YdOwkLP54A2tx2jwUh3l0qP04XLK4iWNSSr1eckTEZkWab9nJ0dm45ja+vxhRyAeQvG8Ol7B1m+9DWCggLIGBXP1TfN4NoRcVj691HX0o29z834gAASrFGUd9czbUgWmq4TERGOpqo4HP1Yrdbz9DcCRTEwJCqK6bNn01xXx/D+XgLVWD766DSSrDB79oyLKG2AhvpGsrNH+8+r7U1EWILo79a5blYKp2waFdtOM3/RdM629fLR61soOFJDQ20bsiwxZXYGaSPjz0Mqr1cVFaebxfoPDojlS14VYxIfEHXHy0T3Hx4WNY3tYl9RnRBCiB3N+eKeQ3/1jVF9yP9kUZEoKCj084qDsOz4iRPiWEGB8Hq9orGpWeQfKxTHTxaJ9o4OUVNbJ/bt2y/cbrd/nN1uF5s2b/HNrfnmfqHoA7H6zFdCV3Vxtr1LFDV0irrfPyxEY5V4/e87RFroneKvz3wl9m4/JdrPdfshFUIIoWsXs5C9Pf1ifOIqsXVrqbA/+6TwnD6P/5yqWyza+Yhoddh8lLeuC7fbLb759jvh8Xj8QuUdzRcnior+xzSlqblZ7NyVKzo6bEIIIXJz94iaWt8LVDVNeHVVXLfzEdHobDs/qM8uGu+9VwihipsX/FU8vvLd75G7PswrD1ZAhMBPRVsCzYxIjiY/vwbrhAnYd++jw+Hkk8/WEyCMzE+YxBtlXyFJEpquYTKZGDFiBMeOFSBJEnv3HyAsNIRxY8aA0Ol09PPm7kLW7DxGm70HIXwIJCE+nsmTJnLmzBmOFRxHF4IRScNRdRVFlvm8Zidp4cOIcFj4bP2XqELQnbuPwNQR9GoKVSWNTJqehqr60iUfuvfBNvnCrFYeEFBRFKbOGcnejfloU2ajnS5B9Ngxmc14NS93ZSzm8LkSyuwNGBUDqq4xdkw2PT29bNi0idSUZDIzMhBC0NHXzwd5JazbX8qnB8+wpbKZc/0uZFlG0zRCQkKYNGkSeXmHmTZ1MrrQkSUZu8fB2+UbeWj0Lbg1Lwaj0ceZ7NxJ2C+WcGTfGRwONzPmjMJgkJGViys/8vdJUaNRofhELd98dpQRQ8MgMhIlLRVTbi43LF2MbJCxyGaeGLeMRwv/jlvzokgymq4zY8Z07N12QkNC/U7h4JlG9hU3MCU5iliLgZMl9VS1dQ/wgQqaprF12zZuvOF6rNYBAlaSebjgVZZlXEOCOYqw6FBuWLoY18EDYDQgJ6URpOgYjAZe/fO3qJqGosgIXVxalBi0s91bi0RmxN3ivjveEE6HSwhNE94Om6i7/XbhaWvzKbHw3fvH/e+LZYf+JLwD5R9N6KKzs1N8+tnnor6+QQghRGFlk1jx6nrx9rEKMeHef4ppd78oqlrb/HnY5+u/FOXlFReVkZ448W9x25YXhKtP91MBmscjGlasEM4zZ/x2fOxwhRibcJ+4feEroqe7359T+osSg3ziN58e4on7P2LFvfN57LkbfIJrGigK3d9twLFvDwmvvka/08M3e8pob9HoyDzBWUMdf8l+kNhAX6nH3tvD7t17iI6KZua0KeSXN7HpRDUmSeeysSlMTYunrLyS4uISpk6bSnJSki/A6hr35b1MqMXKxNarOVRaw0O3TCIpMYK2V18Bo5moVauQNA0dH1laW9nKyttWYwow8NYX9xM9JMyXsfuTMcASaEb1asyanwWAx60iKQoSEL74OpTwcPreeZO8Ridl1W0MGxFAbOUEhvdlser4X1hfkwtAaHAISxcvxhxgZv0332FwtvPQVdk8cO1EwrQeNmzeRmtbG9cvXeoXal/rcZbsepQxUclk1c7jUGktbqeHAw0OHNu24KyoZsiqVcjgX5PH7WVEWiwpGXG4nSoBASYGmRY/5zGYRvzXfe+zf2cJOwqfxxpkAaCxro1TBTXMWzqZ3j88gjJmPNVzr2f39kKqmruYkZlKb6CNuvh8Ovr6uHHE5cweMpEQkw8W1Zyuob2jHYAgaxBZWVkQAB6hcaDlOJta99Pp6GXFsF9weKOT4ckWKqrbyZ46mqVaFfWvryb5/bcpLmnF1tbLlFkZWAJ9fOVXnxzksXs+4Nt9T5I9PsnPZl9A5vgktXf1s2DaM0yblUHqyAS2bzhOS3Mn3R29TJ4zitXr7sH57BMEjcyiZtGvOHKkguLTDVw5LZPuLi8k2tjfcxi3sY/hIUNICEwgIyqJQMmM0AWaQafS1kB1dz1NjjasShDWs8NI6E9h4ew01m0voKPHy1XXTGRG9UE6139B0trV7NxfyyMr1iIpMsEhFsZNSmbarEz+8ZfvWHrrdP7w/I0/zARfWODbtqGQ39/5FmkjE5g8I50rrh1PSGggq+5YjaQYeW/jw1jXrUbttuO6cxXba9w42zs4UFjHqhums7+gmdB4QYtoIiDWjc3ThQs3JqOMs08jxhJJNNFItjCyopOoaepkX3ElE0bFMzQ1kZmpYQR8uJb+ugbiX3mZj9cd5cmV73Df49dx07JZHDlQxv5dpeQfLCNuaCQfb34Ui8V0MQXx/fqY71TQ1GBj6PDoi9F6Zx8rb/kXzc3dvP7FgySV5eHYvAHzVdfQM+MKdpR00H62g/LKFqaPHoaty4NJMaFqOrPGD+VgUSM5mbFU1HYyOi2S8qZz5BbWMHtyCl5TAAsnDSXiVB7ub77EOD6HsLvvYfVLG3nzlc08/ucbWXbP/IvWY+/ux+PxEj0k7JK62U8W/rSB1gdd1zEYFDptvczMeJS77r+Ch56+HldrGz3vv4PW3Ixx6nRa0sbjiIylocPBubZuTpU3Ex5oZFhMCAdPNPKrhdkcKW1lwphhmALMRAYHILefI/nsGdSD+9CMZsJW/BpLWir9fQ7mjXuSOVeO4cXVKwbaJ2S/EIP9IT9UDPxRwb7fWOKr6st8/t5eXn7ma7Yde57o6GCELPtY3c5zuDZvxl1Whm4JwpmYhJY4AjkmhtpeHXOQhejQQPr6nCSHKvQ1nsXQVI9eVYHB3omcmEjI0sWQ4CsTaV4VxWhgzWtb+fCNXWw5+iyhYUH+osOFfuGHKpw/q1Q7eIcQOgunP8PUWSN5+uVbfDVoSfLZ5dZTBEWFk50SSnB7I1JVOe7aOhwdXSgIdE2g6TqyIuHRwBIWTOCIJIxZo9CT0mhxGjiyp5hxWTGkZCb65+7q7GPB1D+x6vFF3H733IscxP+5uK7rvsk2fX2MU4X1/OG/fznAxfsqJh+uzeW5Rz8lIiIQY4CJtPGpTJ07msmXTSMzLRqTUNE9biRAMpowBFpo7XKRd6KBvHWlFOz7jo5mGw6Hl+i4UNZtfIT4oZEAREaHMG5SMmte28LSW6dhDbL46fj/uLh+Prv1qeXx/Cr+9uy3lBU3cNPy2ax8dCF7txdx3x1reOH1O5i/cDz5Bys4eqCMomPVVJW3ct1NU3npjV8jBkKnDNRUnuX2Ba+gahqZWYlMnpHJtMtHkjA0gvvuWENPl4PPd/yBpvp2nv/DZ9RWnOP6X83gvscWYg0K8FcELmSw/8cGFl3XhaqqQlXVH2pjGWgn8ohP3tsjZmQ8ImaOfEyMir5H/POlDT+Yb73x6mYxNe0R0dvjELqmC4/bK3RNF5+8u1fkDL9ftDTbLhlj6+gRC6b+SUxJfViMT1wlfnP9a6JkIMnV9fNJ7IWHpmlCVVU/1vQnmj92uN0e0dfXL7q77Zf81t/nEs899rF48anP/b1OmqYLVdWEx+N7MRWnm0RWzEpReKTyorH3L18jli3+m3/chWOFEKKxrk385obXxM7NhT+4LofDKfr7HaK/v9/f23Xh5vh7qQbdpcfjYdOmLWzZupW6ujr6+vpxu114PB6GDBlCeno6EydOYELOBMaNy+apl269cO/98xgMMghISokhNj6MnVtOkjAsClXV0DWNk8dquWXFZX5VVwYaZAQCVVVJHB7N2188eJ73qK7l2LF8DuflUVFRic1mG6DLBSEhQcTHx5OZmcmSJYsZO2aMbx36QHnF4/Fw4003s2njZoxGAwaDz69YLBYCAgLo7e2lv78fg8FAcHAwSUlJTJ8+nQULrmHqlCmEhoZcZJuqqiLLMk+s+oAvPjpETFwomqojBPT1Ovlww0PkTElD03zx8cK+RK9X5dSpU2zbvoMdO3ZQWlpKf38/Xq/X3+4HYDKZ/M/SdR2TycQXX3zONVdf7RNMkiTsdjvjcyZit9v9A7xeLwkJCaxcuZJTp07R29vLV199hcHgKwD02LuRZIURI5K54op5zJs7jylTJjNs2FD/Ih19Ko21HUjyIMUmYTQZSE6/GNXY7XYKj59g39597Ny1i5KSEnp77AwdNpzY2FjKysqIiIggJCSE0NBQzGYzlZWVOBwOFEXBaDTS1NTMv//9Oivvvfe8u5ckiUCLhc7OTjRN8zdo6ZpOU1MTra2tXHfdddTX1xMYGMjBgwe5/4EHaW1tpbi4mLVr1vLhh+uIiopkTHY2GZkZjBiRTGrqCGLjhmAxWjCbTLjdbuwOJ5u3FNDa2kpjQyOVVVWcPHmSxsZGXC4XgYGBxMfHY01LY9q0aZSXl3P//fdjtVpxuVyMHj2a+vp6CgsLMRqNA4hEQlEUTCbTpXFssLQjyzKyLON2u4mLj+NMeRlBQUG0traycuVK1q1bx6hRo5gwIYf+fgcRERG4XC46Ozvp6upmZ24u23fsAMBoNPnVMzAwEE3TUFUVOK9CiqL4n2k2m4mNjWXq1Kk4nU6MRiMTJ05ECEF5eTl9fX3s2LGD3t5eZFlGURS/bQ8WEy8STNd9dPGgWmqahqIo7N69G0mWUWSFwEALmSNHcub0aZYtW8batW+SnZ3NlClTyMzMJD8/n7KyMmw2G16vF4Sgp7eX4OBgQkND6ejowONRB7rYfOyW0WgEBHFx8aSnp5OVlUV0dDR9fX188MEHxMfHU1xcTFFREe3t7b6KqK6jGAyYzWYcDoe/KqooyqXIQ+i6z0BVlYULFzJ8+HAMBoVAq5WamhrMRhOlp09TVlaG0+nkjTfewGw24/X6Sj7x8fFEREZy7733sHHjJgICAoiOjqag4BhdXd3cfPPNvP7660yYMAGAYcOGERwcTEpKCh999BF33nkncXFx2Gw2enp6KC0tpaWlhX/84x8IXSM8IpJx48aRnZ1NQIAZS2AgEeHhtLaeo6enh4KCAmwdJ5EG8K1fMKfLSVpaKuPGjsPhdFJYWMjy5cvJyMygqamJG36xFF3XaWxsJC/vCLtyc8nLO8rx48c5ln+E4JAwYmJj6O2xU1xczO23305GRjq6rnP27Fk6Ojq47bZbmT59Bl6vl+DgIPbu3UdERARWq5Xi4mL27t3LkSNHOHv2LLrmZdjwZK65+mrmzp3LrFkzSElJxWw20dR8lr37DzB+7Fieevop+np7mXPZZYwfPw6nw+XzGYNesbaujsLCE8TGDGHWrJkAHDqcx8QJOaxb9zHLlt1xSdd2d3c3R4/ms3vPHnJ35XKmrBxHfw+B1mCioqKIj4+noaGB9PR0hg4dSkBAAA0NDURERGCz2Th9+rR/nr5eOwDRQ2KZN28e1y1ayMyZMxk6NPES3Fp6+jS2Dhtz5lzGnMvnsm/vHu68626eeuopCguPs3TJdYMtRz6jO3zkKAZFoa2tnb7+PtJSU2lrbyM9NZW0tDS/czkfWM/rtMvlori4hN2795C7Zw8V5eW0trb6nIXXC+iXwDlzgJWwsFCGDx9GTk4Ol8+5nMmTJ5I0QPAMCvL9/n63282Bg4ewWq10d3fT29tLUlISTpebnPFjCQ4KuhQEt3fY/O5eVb2Eh4X5qyg/BJIHhb1QSID29g6qa6qpqqqmpaUVu92Ow+HAaDQSEhJMTEwsw4Ylkp6WTkJC/IATOW/v+sCfCf6nbtL29naQZQyKAY/HTWREhB9YXCTYj7Wl/px21Qt7N74v5M9rzdX88fTn/Dvip9b6I5zHT6QEP/MvIoNqdOFc3z//fs/H//YZP7bW/wcSadRqjFudegAAAABJRU5ErkJggg==" alt="Govt. Polytechnic Dharmavaram Logo" style="width:40px;height:44px;object-fit:contain;flex-shrink:0;">
+          <div style="border-left:1px solid rgba(255,255,255,0.12);padding-left:10px;">
+            <div class="footer-brand-name">Govt. Polytechnic <span>Dharmavaram</span></div>
+            <div style="font-size:9.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--blue-muted);margin-top:3px;">The Place to Learn and Grow</div>
+          </div>
+          
+        </div>
+        <p>Tarakaramapuram, Dharmavaram – 515672, Anantapuramu District, Andhra Pradesh.<br>Affiliated to SBTET &nbsp;·&nbsp; AICTE Approved.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Academics</h5>
+        <ul>
+          <li><a href="https://govtpolydharmavaram.ac.in/academics" target="_blank">Academics</a></li>
+          <li><a href="https://polycetap.ap.gov.in/Default.aspx#" target="_blank">Admissions (POLYCET)</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/examinations" target="_blank">Examinations</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/fee-structure" target="_blank">Fee Structure</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Institution</h5>
+        <ul>
+          <li><a href="https://govtpolydharmavaram.ac.in/about" target="_blank">About</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/vision-and-mission" target="_blank">Vision &amp; Mission</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/principals-message" target="_blank">Principal's Message</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/alumni" target="_blank">Alumni</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/placements" target="_blank">Placements</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/gallery" target="_blank">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="https://govtpolydharmavaram.ac.in/aicte" target="_blank">AICTE</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/aicte-feedback-facility" target="_blank">AICTE Feedback</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/ap-polygrievance-app" target="_blank">AP Polygrievance App</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/grievance-redressal-cell" target="_blank">Grievance Cell</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/contact" target="_blank">Contact</a></li>
+          <li><a href="https://govtpolydharmavaram.ac.in/post-term/downloads" target="_blank">Downloads</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2023 Government Polytechnic Dharmavaram. All rights reserved.</span>
+      <span>Affiliated to SBTET, Andhra Pradesh &nbsp;·&nbsp; AICTE Approved</span>
+      <span style="color:rgba(255,255,255,0.25);font-size:10.5px;width:100%;margin-top:4px;">
+        Designed &amp; Developed by <span style="color:var(--blue-muted);font-weight:600;">Naga Ganesh Eswar</span> &nbsp;·&nbsp; IT Student, Govt. Polytechnic Dharmavaram
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal — graceful: content visible by default, animates if JS works
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  // Mark for animation
+  els.forEach(el => el.classList.add('animate-ready'));
+  const obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function() {
+          e.target.classList.add('in');
+          e.target.classList.remove('animate-ready');
+        }, i * 55);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+
+// Nav elevation on scroll
+var nav = document.getElementById('main-nav');
+window.addEventListener('scroll', function() {
+  nav.style.boxShadow = window.scrollY > 12
+    ? '0 2px 18px rgba(10,37,64,0.10)'
+    : '0 1px 4px rgba(10,37,64,0.06)';
+}, { passive: true });
+
+// Hamburger menu
+var hamburgerBtn   = document.getElementById('hamburger-btn');
+var mobileNav      = document.getElementById('mobile-nav');
+var mobileClose    = document.getElementById('mobile-nav-close');
+var mobileBackdrop = document.getElementById('mobile-nav-backdrop');
+
+function openMenu() {
+  mobileNav.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  mobileNav.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMenu);
+if (mobileClose)  mobileClose.addEventListener('click', closeMenu);
+if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMenu);
+
+// Close mobile nav when a link is clicked
+var mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+mobileLinks.forEach(function(link) {
+  link.addEventListener('click', closeMenu);
+});
+</script>
+</body>
+</html>
